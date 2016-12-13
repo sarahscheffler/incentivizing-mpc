@@ -1,0 +1,64 @@
+# single-dimension for now
+
+# si = sum of party i's data points
+# ni = number of party i's data points
+
+# each Pi has one point (ni = 1), and the points are 8, 1, 2, 4, 5.
+# With P1, the mean is 4.  Without P1, the mean is 3.
+
+int1 = sint.get_raw_input_from(0)
+int1.reveal_to(0)
+
+s1 = sfloat(9.0)
+n1 = sfloat(1.0)
+
+s2 = sfloat(1.0)
+n2 = sfloat(1.0)
+
+s3 = sfloat(2.0)
+n3 = sfloat(1.0)
+
+s4 = sfloat(4.0)
+n4 = sfloat(1.0)
+
+s5 = sfloat(5.0)
+n5 = sfloat(1.0)
+
+# Normal mean
+def mean(sum_of_all_points, num_points):
+    if isinstance(sum_of_all_points, (sint, sfloat)):
+        mean = sum_of_all_points / num_points
+        return mean
+    else:
+        println('oops')
+        return None
+
+# Convert from integer encoding to python float
+# TODO: Stop using the SPDZ convention of vpzs and start using 
+# significand/exponent/zeroflag/signbit
+def intsToFloat(v, p, z, s):
+    #TODO: validate
+    return (1-2*s)*(1-z)*v*(2**(-p))
+
+mean_with_p1 = mean(s1 + s2 + s3 + s4 + s5, n1 + n2 + n3 + n4 + n5)
+mean_without_p1 = mean(s2 + s3 + s4 + s5, n2 + n3 + n4 + n5)
+
+diff = mean_with_p1 - mean_without_p1
+v = diff.v.reveal()
+p = diff.p.reveal()
+z = diff.z.reveal()
+s = diff.s.reveal()
+
+print_ln('========================================')
+print_ln('v: %s', v)
+print_ln('p: %s', p)
+print_ln('z: %s', z)
+print_ln('s: %s', s)
+print '==================='
+print 'bit_decompose on v is: '
+print v.bit_decompose()
+print '==================='
+#print 'v.chunks len: ' + len(v.chunks) + ', chunks[0]: ' + v.chunks[0]
+#print 'The meandiff for party 1: ' + intsToFloat(v, p, z, s)
+print_ln('========================================')
+

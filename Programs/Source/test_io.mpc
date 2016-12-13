@@ -1,0 +1,9 @@
+
+# simple test - read and reveal back an int
+
+int1 = sint.get_raw_input_from(0)
+int1.reveal_to(0)
+print_ln('==============================')
+print_ln('The revealed int was %s', int1.reveal())
+print_ln('==============================')
+

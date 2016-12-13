@@ -1,0 +1,43 @@
+# single-dimension for now
+
+# si = sum of party i's data points
+# ni = number of party i's data points
+
+# each Pi has one point (ni = 1), and the points are 8, 1, 2, 4, 5.
+# With P1, the mean is 4.  Without P1, the mean is 3.
+
+s1 = sint(8)
+n1 = sint(1)
+
+s2 = sint(1)
+n2 = sint(1)
+
+s3 = sint(2)
+n3 = sint(1)
+
+s4 = sint(4)
+n4 = sint(1)
+
+s5 = sint(5)
+n5 = sint(1)
+
+# Normal mean
+def mean(sum_of_all_points, num_points):
+    if isinstance(sum_of_all_points, sint): # can't do division in gf2n
+        mean = sum_of_all_points / num_points
+        return mean
+    else:
+        println('oops')
+        return None
+
+mean_with_p1 = mean(s1 + s2 + s3 + s4 + s5, n1 + n2 + n3 + n4 + n5)
+mean_without_p1 = mean(s2 + s3 + s4 + s5, n2 + n3 + n4 + n5)
+
+diff = mean_with_p1 - mean_without_p1 #todo signs
+
+clear_diff = diff.reveal()
+
+print_ln('========================================')
+print_ln('The difference in means is %s', clear_diff)
+print_ln('========================================')
+

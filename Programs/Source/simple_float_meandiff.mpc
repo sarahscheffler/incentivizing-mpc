@@ -1,0 +1,46 @@
+# import
+from Compiler.floatingpoint import FLRound
+
+# single-dimension for now
+
+# si = sum of party i's data points
+# ni = number of party i's data points
+
+# each Pi has one point (ni = 1), and the points are 8, 1, 2, 4, 5.
+# With P1, the mean is 4.  Without P1, the mean is 3.
+
+s1 = sfloat(9.0)
+n1 = sfloat(1.0)
+
+s2 = sfloat(1.0)
+n2 = sfloat(1.0)
+
+s3 = sfloat(2.0)
+n3 = sfloat(1.0)
+
+s4 = sfloat(4.0)
+n4 = sfloat(1.0)
+
+s5 = sfloat(5.0)
+n5 = sfloat(1.0)
+
+# Normal mean
+def mean(sum_of_all_points, num_points):
+    if isinstance(sum_of_all_points, (sint, sfloat)):
+        mean = sum_of_all_points / num_points
+        return mean
+    else:
+        println('oops')
+        return None
+
+mean_with_p1 = mean(s1 + s2 + s3 + s4 + s5, n1 + n2 + n3 + n4 + n5)
+mean_without_p1 = mean(s2 + s3 + s4 + s5, n2 + n3 + n4 + n5)
+
+diff = mean_with_p1 - mean_without_p1 #todo signs
+int_diff = FLRound(diff, 0); #0=floor, 1=ceil, -1=trunc
+clear_int_diff = int_diff.reveal()
+
+print_ln('========================================')
+print_ln('The difference in means is %s', clear_int_diff)
+print_ln('========================================')
+
